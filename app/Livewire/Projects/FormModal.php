@@ -2,11 +2,16 @@
 
 namespace App\Livewire\Projects;
 
+use App\Services\ProjectService;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class FormModal extends Component
 {
+    use WithFileUploads;
+
+
     #[Validate('required|string|max:100')]
     public $name = null;
 
@@ -25,10 +30,12 @@ class FormModal extends Component
 
     // Function: saveProject
 
-    public function saveProject()
+    public function saveProject(ProjectService $projectService)
     {
         #Validating form here
         $validatedProjectRequest = $this->validate();    
+
+        $projectService->saveProject($validatedProjectRequest);
     }
 
     public function render()
