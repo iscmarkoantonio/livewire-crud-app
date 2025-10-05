@@ -7,7 +7,17 @@
 
     {{-- button section --}}
     <div class="text-end mb-4">
-        <flux:button variant="primary" color="indigo" icon="plus-circle" class="cursor-pointer">Add Project</flux:button>
+
+
+        <flux:modal.trigger name="project-modal">
+            <flux:button variant="primary" color="indigo" icon="plus-circle" class="cursor-pointer">Add Project
+            </flux:button>
+        </flux:modal.trigger>
     </div>
+
+    {{-- Render form component --}}
+    <livewire:projects.form-modal />
+
+
 
 </div>
