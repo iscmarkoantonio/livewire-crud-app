@@ -60,7 +60,20 @@
                         <td class="py-4">{{ $loop->index + 1 }}</td>
                         <td class="py-4">{{ $project->name }}</td>
                         <td class="py-4">{{ $project->description }}</td>
-                        <td class="py-4">{{ $project->status }}</td>
+                        <td class="py-4 capitalize">
+
+                            @php
+                                $statusColor = match ($project->status) {
+                                    'pending' => 'bg-yellow-300 text-yellow-800 border border-yellow-500',
+                                    'in-progress' => 'bg-blue-300 text-blue-800 border border-blue-500',
+                                    'completed' => 'bg-green-300 text-green-800 border border-green-500',
+                                    'cancelled' => 'bg-red-300 text-red-800 border border-red-500',
+                                };
+                            @endphp
+
+                            <span class="px-3 py-1 rounded shadow-sm {{ $statusColor }}">{{ $project->status }}</span>
+
+                        </td>
                         <td class="py-4">{{ $project->deadline }}</td>
                         <td class="py-4">
                             @if ($project->project_logo)
@@ -72,6 +85,30 @@
                         {{-- Actions --}}
 
                         <td class="py-4">
+
+                            {{-- Project Modal --}}
+                            <flux:modal.trigger name="project-modal">
+
+                                {{-- View --}}
+                                <flux:button
+                                    wire:click="dispatch('open-project-modal', { mode: 'view', project: {{ $project }} })"
+                                    class="cursor-pointer" variant="primary" color="sky" icon="eye"
+                                    class="cursor-pointer">
+                                </flux:button>
+
+                                {{-- Edit --}}
+                                <flux:button
+                                    wire:click="dispatch('open-project-modal', { mode: 'edit', project: {{ $project }} })"
+                                    class="cursor-pointer mx-1" variant="primary" color="blue" icon="pencil"
+                                    class="cursor-pointer">
+                                </flux:button>
+
+                            </flux:modal.trigger>
+
+                            {{-- Delete --}}
+                            <flux:button class="cursor-pointer" variant="primary" color="red" icon="trash"
+                                class="cursor-pointer">
+                            </flux:button>
 
                         </td>
                     </tr>

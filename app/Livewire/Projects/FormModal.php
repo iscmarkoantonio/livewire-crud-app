@@ -4,6 +4,7 @@ namespace App\Livewire\Projects;
 
 use App\Services\ProjectService;
 use Flux\Flux;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -48,6 +49,12 @@ class FormModal extends Component
         Flux::modal('project-modal')->close();
 
         
+    }
+
+    #[On('open-project-modal')]
+    public function projectDetail()
+    {
+        dd('hello');
     }
 
     public function render()
