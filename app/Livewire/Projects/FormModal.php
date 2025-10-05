@@ -36,6 +36,8 @@ class FormModal extends Component
         $validatedProjectRequest = $this->validate();    
 
         $projectService->saveProject($validatedProjectRequest);
+
+        $this->reset();
     }
 
     public function render()
