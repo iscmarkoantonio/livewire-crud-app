@@ -3,6 +3,7 @@
 namespace App\Livewire\Projects;
 
 use App\Services\ProjectService;
+use Flux\Flux;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -38,6 +39,15 @@ class FormModal extends Component
         $projectService->saveProject($validatedProjectRequest);
 
         $this->reset();
+
+        $this->dispatch('flash', [
+            'message' => 'Project created successfully!',
+            'type' => 'success',
+        ]);
+
+        Flux::modal('project-modal')->close();
+
+        
     }
 
     public function render()

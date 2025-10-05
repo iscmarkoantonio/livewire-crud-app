@@ -19,5 +19,28 @@
     <livewire:projects.form-modal />
 
 
+    {{-- Flash message component --}}
+    <div x-data="{ show: false, message: '', type: '' }" x-init="window.addEventListener('flash', e => {
+        const data = e.detail[0];
+        message = data.message;
+        type = data.type;
+        show = true;
+        settimeout(() => show = false, 4000);
+    
+    });" x-show="show" x-transition
+        class="fixed top-4 right-4 px-4 py-2 rounded shadow-lg text-white z-50"
+        :class="{
+            'bg-emerald-600': type === 'success',
+            'bg-red-600': type === 'error',
+        }"
+        style="display: none;">
+
+        <span x-text="message"></span>
+
+    </div>
+
+    {{-- Table for listing --}}
+
+
 
 </div>

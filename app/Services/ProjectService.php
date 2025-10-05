@@ -34,4 +34,17 @@ class ProjectService
 
         return $this->projectRepository->saveProject($projectRequest);
     }
+
+
+    /*Function: getAllProjects*/
+
+    public function getAllProjects()
+    {
+        return $this->projectRepository->getProjectQuery();
+    }
+
+
+
+
+
 }
