@@ -56,6 +56,8 @@ class FormModal extends Component
             'type' => 'success',
         ]);
 
+        $this->dispatch('refresh-project-listing');  
+
         Flux::modal('project-modal')->close();
 
         
@@ -71,6 +73,8 @@ class FormModal extends Component
 
         if ($mode === 'create') {
             $this->isView = false;
+            $this->projectId = null;
+            $this->existingImage = null;
             $this->reset();
         } else {
 
