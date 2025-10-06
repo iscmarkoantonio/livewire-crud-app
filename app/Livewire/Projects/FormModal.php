@@ -41,7 +41,13 @@ class FormModal extends Component
         #Validating form here
         $validatedProjectRequest = $this->validate();    
 
-        $projectService->saveProject($validatedProjectRequest);
+        if ($this->projectId) {
+            $projectService->updateProject($this->projectId, $validatedProjectRequest);
+        } else {
+            $projectService->saveProject($validatedProjectRequest);
+        }
+
+        
 
         $this->reset();
 

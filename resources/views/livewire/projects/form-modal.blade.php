@@ -57,7 +57,8 @@
             </flux:modal.close>
 
             @if (!$isView)
-                <flux:button type="submit" variant="primary" color="indigo" class="cursor-pointer ms-2">Save Projects
+                <flux:button type="submit" variant="primary" color="indigo" class="cursor-pointer ms-2">
+                    {{ $projectId ? 'Update' : 'Save' }} Project
                 </flux:button>
             @endif
         </div>

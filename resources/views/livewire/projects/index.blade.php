@@ -106,9 +106,11 @@
                             </flux:modal.trigger>
 
                             {{-- Delete --}}
-                            <flux:button class="cursor-pointer" variant="primary" color="red" icon="trash"
-                                class="cursor-pointer">
-                            </flux:button>
+                            <Flux:modal.trigger name="delete-project">
+                                <flux:button class="cursor-pointer" variant="primary" color="red" icon="trash"
+                                    class="cursor-pointer">
+                                </flux:button>
+                            </Flux:modal.trigger>
 
                         </td>
                     </tr>
@@ -127,5 +129,25 @@
             </tbody>
         </table>
     </div>
+
+    {{-- Delete Project Modal --}}
+    <flux:modal name="delete-project" class="min-w-[25rem]">
+        <div class="space-y-6">
+            <div>
+                <flux:heading size="lg">Delete project?</flux:heading>
+                <flux:text class="mt-2">
+                    <p>You're about to delete this project.</p>
+                    <p>This action cannot be reversed.</p>
+                </flux:text>
+            </div>
+            <div class="flex gap-2">
+                <flux:spacer />
+                <flux:modal.close>
+                    <flux:button variant="ghost">Cancel</flux:button>
+                </flux:modal.close>
+                <flux:button type="submit" variant="danger">Delete project</flux:button>
+            </div>
+        </div>
+    </flux:modal>
 
 </div>
