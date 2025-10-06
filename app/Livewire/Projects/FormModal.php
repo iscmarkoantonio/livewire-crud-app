@@ -29,6 +29,10 @@ class FormModal extends Component
     #[Validate('nullable|image|max:5120')]
     public $project_logo = null;
 
+    public $projectId = null;
+    public $isView = false;
+    public $existingImage = null;
+
 
     // Function: saveProject
 
@@ -52,9 +56,29 @@ class FormModal extends Component
     }
 
     #[On('open-project-modal')]
-    public function projectDetail()
+    public function projectDetail($mode, $project = null)
     {
-        dd('hello');
+        // dd($mode, $project);
+
+     
+        $this->isView = $mode === 'view';
+
+        if ($mode === 'create') {
+            $this->isView = false;
+            $this->reset();
+        } else {
+
+            // dd($project);
+
+            $this->projectId = $project['id'];
+
+            $this->name = $project['name'];
+            $this->description = $project['description'];
+            $this->deadline = $project['deadline'];
+            $this->status = $project['status'];
+            $this->existingImage = $project['project_logo'];
+
+        }
     }
 
     public function render()
