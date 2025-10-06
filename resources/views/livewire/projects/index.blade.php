@@ -18,6 +18,7 @@
 
     {{-- Render form component --}}
     <livewire:projects.form-modal />
+    <livewire:common.delete-confirmation />
 
 
     {{-- Flash message component --}}
@@ -108,8 +109,17 @@
 
                             {{-- Delete --}}
 
-                            <flux:modal.trigger name="delete-project">
-                                <flux:button wire:click="$dispatch('delete-project', { id: {{ $project->id }} })"
+                            <flux:modal.trigger name="delete-confirmation-modal">
+                                <flux:button
+                                    wire:click="$dispatch('confirm-delete', {
+                                    id: {{ $project->id }}, 
+                                    dispatchAction: 'delete-project',
+                                    modalName: 'delete-confirmation-modal',
+                                    heading: 'Delete Project?',
+                                    subheading: 'You are about to delete this project: <strong> {{ $project->name }} </trong>. <br/> This action cannot be undone.',
+                                    confirmButtonText: 'Delete Project', 
+
+                                    })"
                                     class="cursor-pointer" variant="primary" color="red" icon="trash"
                                     class="cursor-pointer">
                                 </flux:button>
@@ -140,24 +150,6 @@
     </div>
 
 
-    {{-- Delete Project Modal --}}
-    <flux:modal name="delete-project" class="min-w-[25rem]">
-        <div class="space-y-6">
-            <div>
-                <flux:heading size="lg">Delete project?</flux:heading>
-                <flux:text class="mt-2">
-                    <p>You're about to delete this project.</p>
-                    <p>This action cannot be reversed.</p>
-                </flux:text>
-            </div>
-            <div class="flex gap-2">
-                <flux:spacer />
-                <flux:modal.close>
-                    <flux:button variant="ghost">Cancel</flux:button>
-                </flux:modal.close>
-                <flux:button wire:click="deleteProject" type="submit" variant="danger">Delete project</flux:button>
-            </div>
-        </div>
-    </flux:modal>
+
 
 </div>

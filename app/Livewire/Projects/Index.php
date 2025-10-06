@@ -19,7 +19,9 @@ class Index extends Component
 
     public function getAllProjects(ProjectService $projectService)
     {
-        return $projectService->getAllProjects()->orderBy('id', 'DESC')->paginate(1);
+        return $projectService->getAllProjects()->orderBy('id', 'DESC')->paginate(10);
+         
+          
     }
 
     /*Function: refreshProjectListing */
@@ -31,20 +33,13 @@ class Index extends Component
 
 
 
-    /*Function: deleteProjectConfirmation*/
+    /*Function: deleteProject*/
     #[On('delete-project')]
-    public function deleteProjectConfirmation($id)
+    public function deleteProject(ProjectService $projectService, $id)
     {
         // dd($id);
-        $this->projectId = $id;
-    }
-
-
-    /*Function: deleteProject*/
-    public function deleteProject(ProjectService $projectService)
-    {
-        if ($this->projectId) {
-            $projectService->deleteProject($this->projectId);
+        if ($id) {
+            $projectService->deleteProject($id);
         }
 
         $this->dispatch('flash', [
